@@ -25,6 +25,14 @@ yarn-error.log*
 .project
 tmp/
 typings/
+.tscache/
+
+#ignore folders everywhere
+node_modules
+.idea
+/
+#ignore files everywhere
+server/app-server/dist/*
 
 # Visual Studio Code
 .vscode/*
