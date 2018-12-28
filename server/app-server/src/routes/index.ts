@@ -46,14 +46,15 @@ export class IndexRoute extends BaseRoute {
      * @next {NextFunction} Execute the next method.
      */
     public index(req: Request, res: Response, next: NextFunction) {
-        //set custom title
-        this.title = "Home | Tour of Heros";
+        console.log('Inside the homepage callback function');
+        console.log(req.sessionID);
 
-        const uniqueId: string = uuid();
+        //set custom title
+        this.title = "Home | Event Platform";
 
         //set options
         let options: Object = {
-            "message": `Hello user ${uniqueId}, Welcome to the Tour of Heros`
+            "message": `Welcome to session ${req.sessionID}, You hit the home page!\n`
         };
 
         //render template

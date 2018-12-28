@@ -2,10 +2,15 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as logger from "morgan";
+import * as session from "express-session";
+import { v4 as uuid } from "uuid";
+import * as FileStore from "session-file-store";
 import * as path from "path";
 import errorHandler = require("errorhandler");
 import methodOverride = require("method-override");
 import { IndexRoute } from "./routes/index";
+
+const SessionFileStore = FileStore(session);
 
 /**
  * The server.
@@ -74,6 +79,18 @@ export class Server {
 
         //use logger middlware
         this.app.use(logger("dev"));
+
+        this.app.use(session({
+            genid: (req) => {
+                console.log('Inside the session middleware');
+                console.log(req.sessionID);
+                return uuid() // use UUIDs for session IDs
+            },
+            store: new SessionFileStore(),
+            secret: 'keyboard cat',
+            resave: false,
+            saveUninitialized: true
+        }));
 
         //use json form parser middlware
         this.app.use(bodyParser.json());
