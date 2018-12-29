@@ -2,8 +2,8 @@ import { Injectable, NgZone } from "@angular/core";
 import * as firebase from "nativescript-plugin-firebase";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-
-import { Car } from "./car.model";
+import { eventMock} from "./eventsMock";
+import { Event } from "~/app/event/shared/event.model";
 
 const editableProperties = [
     "doors",
@@ -27,43 +27,49 @@ const editableProperties = [
 @Injectable({
     providedIn: "root"
 })
-export class CarService {
-    private static cloneUpdateModel(car: Car): object {
-        return editableProperties.reduce((a, e) => (a[e] = car[e], a), {}); // tslint:disable-line:ban-comma-operator
+export class EventService {
+    private static cloneUpdateModel(event: Event): object {
+        return editableProperties.reduce((a, e) => (a[e] = event[e], a), {}); // tslint:disable-line:ban-comma-operator
     }
 
-    private _cars: Array<Car> = [];
+    private _events: Array<Event> = [];
 
     constructor(private _ngZone: NgZone) { }
 
-    getCarById(id: string): Car {
+    getEventById(id: string): Event {
         if (!id) {
             return;
         }
 
-        return this._cars.filter((car) => {
-            return car.id === id;
+        return this._events.filter((event) => {
+            return event.id === id;
         })[0];
     }
+    //get all events
+    load():  Event[] {
+  //      return new Observable((observer: any) => {
+  //          const path = "events";
 
-    load(): Observable<any> {
-        return new Observable((observer: any) => {
-            const path = "cars";
-
-            const onValueEvent = (snapshot: any) => {
-                this._ngZone.run(() => {
-                    const results = this.handleSnapshot(snapshot.value);
-                    observer.next(results);
-                });
-            };
-            firebase.addValueEventListener(onValueEvent, `/${path}`);
-        }).pipe(catchError(this.handleErrors));
+            //const onValueEvent = (snapshot: any) => {
+              //  this._ngZone.run(() => {
+                //    const results = this.handleSnapshot(snapshot.value);
+                  //  observer.next(results);
+               // });
+           // };
+            //firebase.addValueEventListener(onValueEvent, `/${path}`);
+        //}).pipe(catchError(this.handleErrors));
+        for (let evt of eventMock) {
+            console.log(evt.id); // 1, "string", false
+            this._events.push(evt);
+        }
+        return this._events;
+        
     }
 
-    update(carModel: Car): Promise<any> {
-        const updateModel = CarService.cloneUpdateModel(carModel);
+    update(eventModel: Event): Promise<any> {
+        const updateModel = EventService.cloneUpdateModel(eventModel);
 
-        return firebase.update("/cars/" + carModel.id, updateModel);
+        return firebase.update("/events/" + eventModel.id, updateModel);
     }
 
     uploadImage(remoteFullPath: string, localFullPath: string): Promise<any> {
@@ -74,21 +80,22 @@ export class CarService {
         });
     }
 
-    private handleSnapshot(data: any): Array<Car> {
-        this._cars = [];
+    private handleSnapshot(data: any): Array<Event> {
+        this._events = [];
 
         if (data) {
             for (const id in data) {
                 if (data.hasOwnProperty(id)) {
-                    this._cars.push(new Car(data[id]));
+                    this._events.push(new Event(data[id]));
                 }
             }
         }
 
-        return this._cars;
+        return this._events;
     }
 
     private handleErrors(error: Response): Observable<never> {
         return throwError(error);
     }
+
 }

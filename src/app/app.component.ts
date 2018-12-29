@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { initFirebase } from "./shared/firebase.common";
+import { initFirebase } from "~/app/shared/firebase.common";
 import { Routes, Router } from "@angular/router";
 //import { RouterExtensions } from "../../node_modules/nativescript-angular/router";
 

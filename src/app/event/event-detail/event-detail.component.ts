@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
 
-import { Car } from "../shared/car.model";
-import { CarService } from "../shared/car.service";
+import { Event } from "~/app/event/shared/event.model";
+import { EventService } from "~/app/event/shared/event.service";
 
 /* ***********************************************************
 * This is the item details component in the master-detail structure.
@@ -11,15 +11,15 @@ import { CarService } from "../shared/car.service";
 * finds the data item by this parameter and displays the detailed data item information.
 *************************************************************/
 @Component({
-    selector: "CarDetail",
+    selector: "EventDetail",
     moduleId: module.id,
-    templateUrl: "./car-detail.component.html"
+    templateUrl: "./event-detail.component.html"
 })
-export class CarDetailComponent implements OnInit {
-    private _car: Car;
+export class EventDetailComponent implements OnInit {
+    private _event: Event;
 
     constructor(
-        private _carService: CarService,
+        private _eventService: EventService,
         private _pageRoute: PageRoute,
         private _routerExtensions: RouterExtensions
     ) { }
@@ -37,14 +37,14 @@ export class CarDetailComponent implements OnInit {
         this._pageRoute.activatedRoute
             .pipe(switchMap((activatedRoute) => activatedRoute.params))
             .forEach((params) => {
-                const carId = params.id;
+                const eventId = params.id;
 
-                this._car = this._carService.getCarById(carId);
+                this._event = this._eventService.getEventById(eventId);
             });
     }
 
-    get car(): Car {
-        return this._car;
+    get event(): Event {
+        return this._event;
     }
 
     /* ***********************************************************
@@ -56,10 +56,10 @@ export class CarDetailComponent implements OnInit {
 
     /* ***********************************************************
     * The master-detail template comes with an example of an item edit page.
-    * Check out the edit page in the /cars/car-detail-edit folder.
+    * Check out the edit page in the /events/event-detail-edit folder.
     *************************************************************/
     onEditButtonTap(): void {
-        this._routerExtensions.navigate(["/cars/car-detail-edit", this._car.id],
+        this._routerExtensions.navigate(["/events/event-detail-edit", this._event.id],
             {
                 animated: true,
                 transition: {

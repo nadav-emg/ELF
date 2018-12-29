@@ -1,12 +1,23 @@
 import { Component } from "@angular/core";
-import { alert, prompt } from "tns-core-modules/ui/dialogs";
+import { alert, prompt } from "tns-core-modules/ui/dialogs/dialogs";
+import { UserService } from "~/app/services/user.service";
+import { User } from "~/modules/user.module";
+import { Router } from "@angular/router";
+
 @Component({ 
     //selector: "ns-app",
     moduleId: module.id,
     templateUrl: "./login.component.html",
 })
 export class LoginComponent {
+  
+  user: User;
   isLoggingIn = true;
+/**
+ *
+ */
+constructor(private userService: UserService, private router: Router) {}
+  
 
   toggleForm() {
     this.isLoggingIn = !this.isLoggingIn;
@@ -14,10 +25,15 @@ export class LoginComponent {
 
   submit() {
     if (this.isLoggingIn) {
-        // Perform the login
+        const authenticate=this.userService.login(this.user);
+        if (authenticate)
+        {
+          
+        }
     } else {
         // Perform the registration
     }
+    this.router.navigate(["/events"]);
   }
   forgotPassword() {
     prompt({

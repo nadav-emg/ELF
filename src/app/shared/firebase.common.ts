@@ -1,6 +1,6 @@
 import * as firebase from "nativescript-plugin-firebase";
 
-import { Config } from "./config";
+import { Config } from "~/app/shared/config";
 
 /* ***********************************************************
 * The {N} Firebase plugin initialization is explained in the plugin readme here:

@@ -1,7 +1,10 @@
 <FlexboxLayout class="page">
     <StackLayout class="form">
+        <StackLayout class="input-field">
+        <Image src="res://run_logo" stretch="none" > </Image>
+        </StackLayout>
       <StackLayout class="input-field">
-        <TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+        <TextField  hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
       </StackLayout>
   
       <StackLayout class="input-field">
@@ -9,11 +12,11 @@
       </StackLayout>
   
       <StackLayout *ngIf="!isLoggingIn" class="input-field">
-        <TextField hint="Confirm password" ...></TextField>
+        <TextField hint="Confirm password" secure="true"></TextField>
       </StackLayout>
   
       <Button [text]="isLoggingIn ? 'Log In' : 'Sign Up'" (tap)="submit()"></Button>
-      <Label *ngIf="isLoggingIn" text="Forgot your password?"></Label>
+      <Label *ngIf="isLoggingIn" text="Forgot your password?" (tap)="forgotPassword()"></Label>
     </StackLayout>
   
     <Label (tap)="toggleForm()">

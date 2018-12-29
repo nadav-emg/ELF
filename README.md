@@ -37,15 +37,15 @@ The application component:
 - `app.component.ts` - sets up a page router outlet that lets you navigate between pages.
 
 The template has the following components:
-- `/cars/car-list.component.ts` - the master list component. It gets the data and displays it in a list. On item tap, it navigates to the item details component.
-- `/cars/car-detail/car-detail.component.ts` - the item details component. Displays the details of the tapped item. Has an `Edit` button that leads to the edit component.
-- `/cars/car-detail-edit/car-detail-edit.component.ts` - the item details edit component. Provides edit options for the selected item. The `Done` button saves the changes.
+- `/events/event-list.component.ts` - the master list component. It gets the data and displays it in a list. On item tap, it navigates to the item details component.
+- `/events/event-detail/event-detail.component.ts` - the item details component. Displays the details of the tapped item. Has an `Edit` button that leads to the edit component.
+- `/events/event-detail-edit/event-detail-edit.component.ts` - the item details edit component. Provides edit options for the selected item. The `Done` button saves the changes.
 
 There is one model to represent the data items:
-- `/cars/shared/car.model.ts`
+- `/events/shared/event.model.ts`
 
 The template also provides a data service:
-- `/cars/shared/car.service.ts` - serves as a data layer for the master-detail data items. Wraps the functions that are used to make operations on the Firebase database.
+- `/events/shared/event.service.ts` - serves as a data layer for the master-detail data items. Wraps the functions that are used to make operations on the Firebase database.
 
 ### Firebase integration
 The templates uses the [{N} Firebase plugin](https://github.com/EddyVerbruggen/nativescript-plugin-firebase). The initialization is done before the app starts in the `/main.ts` file. The initialization script is located at `/shared/firebase.common.ts`.
