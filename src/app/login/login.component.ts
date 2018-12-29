@@ -49,7 +49,7 @@ constructor(private userService: UserService, private router: Router) {}
           title: "APP NAME",
           message: "Your password was successfully reset. Please check your email for instructions on choosing a new password.",
           okButtonText: "Ok"
-        })
+        })     
       }
     });
   }
