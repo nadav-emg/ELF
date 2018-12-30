@@ -9,6 +9,10 @@ import * as path from "path";
 import errorHandler = require("errorhandler");
 import methodOverride = require("method-override");
 import { IndexRoute } from "./routes/index";
+import {UserRoute} from "./routes/users";
+import { Passport } from "passport";
+import {User} from "./services/user-service";
+import {PassportService} from "./services/passport-service";
 
 const SessionFileStore = FileStore(session);
 
@@ -92,6 +96,11 @@ export class Server {
             saveUninitialized: true
         }));
 
+        let passportService = new PassportService();
+        let passport = passportService.getPassport();
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
+
         //use json form parser middlware
         this.app.use(bodyParser.json());
 
@@ -128,6 +137,7 @@ export class Server {
 
         //IndexRoute
         IndexRoute.create(router);
+        UserRoute.create(router);
 
         //use router middleware
         this.app.use(router);
