@@ -1,10 +1,15 @@
 Done - Server Skeleton
 Done - Session management
+Done - Session persistency
+Done - login & authentication
 
-Right Next - Session persistency
-Continue authentication: https://medium.com/@evangow/server-authentication-basics-express-sessions-passport-and-curl-359b7456003d
-From: If you go to the express docs
-
-Next - Authentication and user management
+Next - PG & users table
+Next - error handling on authentication flows
 Next - event management
+
+Next - password encryption
+Continue authentication: https://medium.com/@evangow/server-authentication-basics-express-sessions-passport-and-curl-359b7456003d
+From: Step 6) Handling encrypted passwords
+
+Next - unit tests
 
