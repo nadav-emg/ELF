@@ -33,6 +33,7 @@ node_modules
 /
 #ignore files everywhere
 server/app-server/dist/*
+server/app-server/sessions/*
 
 # Visual Studio Code
 .vscode/*

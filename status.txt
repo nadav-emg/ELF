@@ -1,0 +1,10 @@
+Done - Server Skeleton
+Done - Session management
+
+Right Next - Session persistency
+Continue authentication: https://medium.com/@evangow/server-authentication-basics-express-sessions-passport-and-curl-359b7456003d
+From: If you go to the express docs
+
+Next - Authentication and user management
+Next - event management
+
