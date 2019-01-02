@@ -12,4 +12,5 @@ Continue authentication: https://medium.com/@evangow/server-authentication-basic
 From: Step 6) Handling encrypted passwords
 
 Next - unit tests
-
+Next - Support HTTPS
+Next - Upgrade node version
